@@ -8,7 +8,7 @@
 // granted to it by virtue of its status as an Intergovernmental Organization
 // or submit itself to any jurisdiction.
 
-/// \file hftrackindexskimscreator.cxx
+/// \file HFTrackIndexSkimsCreator.cxx
 /// \brief Pre-selection of 2-prong and 3-prong secondary vertices of heavy-flavour decay candidates
 ///
 /// \author Gian Michele Innocenti <gian.michele.innocenti@cern.ch>, CERN
@@ -23,7 +23,6 @@
 using namespace o2;
 using namespace o2::framework;
 using namespace o2::framework::expressions;
-using std::array;
 
 /// Track selection
 struct SelectTracks {
@@ -95,7 +94,7 @@ struct HFTrackIndexSkimsCreator {
   OutputObj<TH1F> hvtx3_y_out{TH1F("hvtx3_y", "3-track vtx", 1000, -2.0, 2.0)};
   OutputObj<TH1F> hvtx3_z_out{TH1F("hvtx3_z", "3-track vtx", 1000, -20.0, 20.0)};
 
-  Filter filterSelectTracks = aod::seltrack::issel == 1;
+  Filter filterSelectTracks = aod::seltrack::isSel == 1;
   using SelectedTracks = soa::Filtered<soa::Join<aod::Tracks, aod::TracksCov, aod::TracksExtra, aod::SelTrack>>;
   // FIXME
   //Partition<SelectedTracks> tracksPos = aod::track::signed1Pt > 0.f;
