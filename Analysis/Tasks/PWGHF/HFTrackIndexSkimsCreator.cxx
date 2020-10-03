@@ -48,8 +48,8 @@ struct SelectTracks {
         status = 0;
       UChar_t clustermap = track.itsClusterMap();
       bool isselected = track.tpcNClsFound() >= d_tpcnclsfound &&
-      track.flags() & o2::aod::track::ITSrefit &&
-      (TESTBIT(clustermap, 0) || TESTBIT(clustermap, 1));
+                        track.flags() & o2::aod::track::ITSrefit &&
+                        (TESTBIT(clustermap, 0) || TESTBIT(clustermap, 1));
       if (!isselected)
         status = 0;
       array<float, 2> dca;
