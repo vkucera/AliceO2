@@ -46,10 +46,11 @@ struct SelectTracks {
         hpt_nocuts->Fill(track.pt());
       if (track.pt() < ptmintrack)
         status = 0;
-      UChar_t clustermap_0 = track.itsClusterMap();
-      bool isselected_0 = track.tpcNClsFound() >= d_tpcnclsfound && track.flags() & 0x4;
-      isselected_0 = isselected_0 && (TESTBIT(clustermap_0, 0) || TESTBIT(clustermap_0, 1));
-      if (!isselected_0)
+      UChar_t clustermap = track.itsClusterMap();
+      bool isselected = track.tpcNClsFound() >= d_tpcnclsfound &&
+      track.flags() & o2::aod::track::ITSrefit &&
+      (TESTBIT(clustermap, 0) || TESTBIT(clustermap, 1));
+      if (!isselected)
         status = 0;
       array<float, 2> dca;
       auto trackparvar0 = getTrackParCov(track);
