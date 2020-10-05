@@ -269,7 +269,7 @@ auto InvMassDPlus(const T& candidate)
 {
   return candidate.m(array{RecoDecay::getMassPDG(kPiPlus), RecoDecay::getMassPDG(kKPlus), RecoDecay::getMassPDG(kPiPlus)});
 }
-}
+} // namespace hf_cand_prong3
 
 DECLARE_SOA_TABLE(HfCandBase3, "AOD", "HFCANDBASE3",
                   collision::PosX, collision::PosY, collision::PosZ,
