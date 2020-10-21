@@ -48,7 +48,6 @@ struct HFTrackIndexSkimsCreator {
   using SelectedTracks = soa::Filtered<soa::Join<aod::Tracks, aod::TracksCov, aod::TracksExtra, aod::HFSelTrack>>;
 
   void process(aod::Collision const& collision,
-               aod::BCs const& bcs,
                SelectedTracks const& tracks)
   {
     // first loop over positive tracks
