@@ -32,8 +32,8 @@ struct SelectTracks {
                soa::Join<aod::Tracks, aod::TracksCov, aod::TracksExtra> const& tracks)
   {
     for (auto& track : tracks) {
-      int status_2prong = 1; // selection flag
-      int status_3prong = 1; // selection flag
+      bool status_2prong = true; // selection flag
+      bool status_3prong = true; // selection flag
       // fill table row
       rowSelectedTrack(status_2prong, status_3prong, 0., 0.);
     }
@@ -44,7 +44,7 @@ struct SelectTracks {
 struct HFTrackIndexSkimsCreator {
   OutputObj<TH1F> hNTracks{TH1F("hNTracks", "# of tracks;", 2, 0, 2)};
 
-  Filter filterSelectTracks = (aod::hf_seltrack::isSel2Prong == 1);
+  Filter filterSelectTracks = (aod::hf_seltrack::isSel2Prong == true);
   using SelectedTracks = soa::Filtered<soa::Join<aod::Tracks, aod::TracksCov, aod::TracksExtra, aod::HFSelTrack>>;
 
   void process(aod::Collision const& collision,
@@ -55,7 +55,7 @@ struct HFTrackIndexSkimsCreator {
     for (auto trackPos1 = tracks.begin(); trackPos1 != tracks.end(); ++trackPos1) {
       printf("Filling 0\n");
       hNTracks->Fill(0);
-      if (trackPos1.isSel3Prong() == 0) {
+      if (trackPos1.isSel3Prong() == false) {
         continue;
       }
       printf("Filling 1\n");
