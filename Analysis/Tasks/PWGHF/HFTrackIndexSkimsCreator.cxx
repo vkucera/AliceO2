@@ -28,7 +28,7 @@ using namespace o2::framework::expressions;
 struct SelectTracks {
   Produces<aod::HFSelTrack> rowSelectedTrack;
 
-  void process(aod::Collision const& collision,
+  void process(aod::Collisions const& collisions,
                soa::Join<aod::Tracks, aod::TracksCov, aod::TracksExtra> const& tracks)
   {
     for (auto& track : tracks) {
