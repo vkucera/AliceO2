@@ -28,8 +28,7 @@ using namespace o2::framework::expressions;
 struct SelectTracks {
   Produces<aod::HFSelTrack> rowSelectedTrack;
 
-  void process(aod::Collisions const& collisions,
-               soa::Join<aod::Tracks, aod::TracksCov, aod::TracksExtra> const& tracks)
+  void process(soa::Join<aod::Tracks, aod::TracksCov, aod::TracksExtra> const& tracks)
   {
     for (auto& track : tracks) {
       bool status_2prong = true; // selection flag
@@ -47,8 +46,7 @@ struct HFTrackIndexSkimsCreator {
   Filter filterSelectTracks = (aod::hf_seltrack::isSel2Prong == true);
   using SelectedTracks = soa::Filtered<soa::Join<aod::Tracks, aod::TracksCov, aod::TracksExtra, aod::HFSelTrack>>;
 
-  void process(aod::Collisions const& collisions,
-               SelectedTracks const& tracks)
+  void process(SelectedTracks const& tracks)
   {
     // first loop over positive tracks
     for (auto trackPos1 = tracks.begin(); trackPos1 != tracks.end(); ++trackPos1) {
