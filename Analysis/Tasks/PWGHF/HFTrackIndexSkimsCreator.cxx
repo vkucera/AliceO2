@@ -50,7 +50,7 @@ struct HFTrackIndexSkimsCreator {
     for (auto trackPos1 = tracks.begin(); trackPos1 != tracks.end(); ++trackPos1) {
       printf("Filling 0\n");
       hNTracks->Fill(0);
-      if (trackPos1.isSel2Prong() == false) {
+      if (!trackPos1.isSel2Prong()) {
         continue;
       }
       printf("Filling 1\n");
