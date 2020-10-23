@@ -232,8 +232,8 @@ struct HFTrackIndexSkimsCreator {
 
         auto trackParVarNeg1 = getTrackParCov(trackNeg1);
         auto pVecCandProng2 = array{trackPos1.px() + trackNeg1.px(),
-                              trackPos1.py() + trackNeg1.py(),
-                              trackPos1.pz() + trackNeg1.pz()};
+                                    trackPos1.py() + trackNeg1.py(),
+                                    trackPos1.pz() + trackNeg1.pz()};
         bool isSelectedCand2Prong = true;
 
         // pT cand cut
