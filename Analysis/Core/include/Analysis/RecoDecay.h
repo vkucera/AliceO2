@@ -417,10 +417,10 @@ class RecoDecay
   {
     //Printf("MC Rec.: Expected mother PDG: %d", PDGMother);
     int sgn = 1;                              // 1 if the expected mother is particle, -1 if antiparticle
-    int indexMother = -1; // index of the mother particle
-    int indexDaughterFirst = -1; // index of the first daughter
-    int indexDaughterLast = -1; // index of the last daughter
-    array<int, N> arrDaughtersIndex; // array of daughter indices
+    int indexMother = -1;                     // index of the mother particle
+    int indexDaughterFirst = -1;              // index of the first daughter
+    int indexDaughterLast = -1;               // index of the last daughter
+    array<int, N> arrDaughtersIndex;          // array of daughter indices
     // loop over daughter particles
     for (auto iProng = 0; iProng < N; ++iProng) {
       auto particleI = arrDaughters[iProng].label(); // ith daughter particle
@@ -523,7 +523,7 @@ class RecoDecay
     //Printf("MC Gen.: Expected particle PDG: %d", PDGParticle);
     int sgn = 1; // 1 if the expected mother is particle, -1 if antiparticle
     int indexDaughterFirst = 0; // index of the first daughter
-    int indexDaughterLast = 0; // index of the last daughter
+    int indexDaughterLast = 0;  // index of the last daughter
     // Check the PDG code of the particle.
     auto PDGCandidate = candidate.pdgCode();
     //Printf("MC Gen.: Candidate PDG: %d", PDGCandidate);
