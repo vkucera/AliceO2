@@ -44,7 +44,7 @@ struct TaskLc {
   //OutputObj<TH1F> hdca{TH1F("hdca", "3-prong candidates;prongs DCA to prim. vertex (cm);entries", 100, -1., 1.)};
   OutputObj<TH1F> hdca2{TH1F("hdca2", "3-prong candidates;prongs DCA to sec. vertex (cm);entries", 100, 0., 1.)};
 
-  Configurable<int> d_selectionFlagLc{"d_selectionFlagLc", 1, "Selection Flag for Lc"};
+  Configurable<int> d_selectionFlagLc{"d_selectionFlagLc", 0, "Selection Flag for Lc"};
 
   Filter filterSelectCandidates = (aod::hf_selcandidate_lc::isSelLc >= d_selectionFlagLc);
 

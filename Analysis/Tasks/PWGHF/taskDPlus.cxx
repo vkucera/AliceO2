@@ -44,7 +44,7 @@ struct TaskDPlus {
   OutputObj<TH1F> hDecLenErr{TH1F("hDecLenErr", "3-prong candidates;decay length error (cm);entries", 100, 0., 1.)};
   OutputObj<TH1F> hDecLenXYErr{TH1F("hDecLenXYErr", "3-prong candidates;decay length xy error (cm);entries", 100, 0., 1.)};
 
-  Configurable<int> d_selectionFlagDPlus{"d_selectionFlagDPlus", 1, "Selection Flag for DPlus"};
+  Configurable<int> d_selectionFlagDPlus{"d_selectionFlagDPlus", 0, "Selection Flag for DPlus"};
 
   //Filter filterSelectCandidates = (aod::hf_selcandidate::isSelDPlus >= d_selectionFlagDPlus);
 
