@@ -750,7 +750,6 @@ void spawnDevice(std::string const& forwardedStdin,
   addPoller(deviceInfos.size() - 1, childstderr[0]);
 }
 
-
 struct LogProcessingState {
   bool didProcessLog = false;
   bool didProcessControl = true;
@@ -1165,7 +1164,6 @@ int runStateMachine(DataProcessorSpecs const& workflow,
 
   uv_timer_t force_step_timer;
   uv_timer_init(loop, &force_step_timer);
-
 
   bool guiDeployedOnce = false;
   bool once = false;
