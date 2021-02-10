@@ -189,7 +189,7 @@ foreach(t
         WorkflowSerialization
         TreeToTable
         DataOutputDirector
-	DataInputDirector)
+        DataInputDirector)
 
   # FIXME ? The NAME parameter of o2_add_test is only needed to help the current
   # o2.sh recipe. If the recipe is changed, those params can go away, if needed.
@@ -249,7 +249,7 @@ foreach(b
   o2_add_executable(benchmark-${b}
                     SOURCES test/benchmark_${b}.cxx
                     COMPONENT_NAME Framework
-	            IS_BENCHMARK
+                    IS_BENCHMARK
                     PUBLIC_LINK_LIBRARIES O2::Framework benchmark::benchmark)
 endforeach()
 

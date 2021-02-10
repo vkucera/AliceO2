@@ -13,7 +13,7 @@ install(FILES populateCCDB.C
               DESTINATION share/macro/)
 
 install(FILES cdbSizeV0.txt
-        DESTINATION share/Detectors/Calibration/data)	    
+        DESTINATION share/Detectors/Calibration/data)            
 
 o2_add_test_root_macro(populateCCDB.C
                        PUBLIC_LINK_LIBRARIES O2::CCDB
@@ -26,13 +26,13 @@ o2_add_test_root_macro(retrieveFromCCDB.C
 o2_add_executable(populate-ccdb
                   COMPONENT_NAME calibration
                   SOURCES populateCCDB.cxx
-		  PUBLIC_LINK_LIBRARIES ROOT::MathCore
-		  O2::Framework
-		  O2::CCDB)
+                  PUBLIC_LINK_LIBRARIES ROOT::MathCore
+                  O2::Framework
+                  O2::CCDB)
 
 o2_add_executable(retrieve-from-ccdb
                   COMPONENT_NAME calibration
                   SOURCES retrieveFromCCDB.cxx
-		  PUBLIC_LINK_LIBRARIES ROOT::MathCore
-		  O2::Framework
-		  O2::CCDB)
+                  PUBLIC_LINK_LIBRARIES ROOT::MathCore
+                  O2::Framework
+                  O2::CCDB)

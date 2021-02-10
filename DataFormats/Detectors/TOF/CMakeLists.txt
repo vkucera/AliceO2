@@ -27,4 +27,4 @@ o2_target_root_dictionary(DataFormatsTOF
                                   include/DataFormatsTOF/RawDataFormat.h
                                   include/DataFormatsTOF/CompressedDataFormat.h
                                   include/DataFormatsTOF/CTF.h
-				  )
+                                  )

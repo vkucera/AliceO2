@@ -10,27 +10,27 @@
 
 o2_add_library(TOFCompression
                SOURCES src/Compressor.cxx
-               	       src/CompressorTask.cxx
+                       src/CompressorTask.cxx
                PUBLIC_LINK_LIBRARIES O2::TOFBase O2::Framework O2::Headers O2::DataFormatsTOF
-	                             O2::DetectorsRaw
-	       )
+                                     O2::DetectorsRaw
+               )
 
 o2_add_executable(compressor
                   COMPONENT_NAME tof
                   SOURCES src/tof-compressor.cxx
                   PUBLIC_LINK_LIBRARIES O2::TOFCompression
-		  )
+                  )
 
 o2_add_executable(compressed-inspector
                   COMPONENT_NAME tof
                   SOURCES src/tof-compressed-inspector.cxx
                   PUBLIC_LINK_LIBRARIES O2::TOFWorkflowUtils
-		  )
+                  )
 
 o2_add_executable(compressed-analysis
                   COMPONENT_NAME tof
                   SOURCES src/tof-compressed-analysis.cxx
                   PUBLIC_LINK_LIBRARIES O2::TOFWorkflowUtils
-		  )
+                  )
 
 

@@ -13,4 +13,4 @@ o2_add_library(ZDCBase
                PUBLIC_LINK_LIBRARIES O2::CommonConstants ROOT::MathCore FairRoot::Base)
 
 o2_target_root_dictionary(ZDCBase HEADERS include/ZDCBase/Geometry.h include/ZDCBase/Constants.h
-				  include/ZDCBase/ModuleConfig.h)
+                                  include/ZDCBase/ModuleConfig.h)

@@ -12,9 +12,9 @@ o2_add_library(DataFormatsMID
                SOURCES src/ColumnData.cxx
                        src/Track.cxx
                        src/CTF.cxx
-	       PUBLIC_LINK_LIBRARIES Boost::serialization O2::MathUtils
-	                             O2::CommonDataFormat
-	                             O2::DetectorsCommonDataFormats
+               PUBLIC_LINK_LIBRARIES Boost::serialization O2::MathUtils
+                                     O2::CommonDataFormat
+                                     O2::DetectorsCommonDataFormats
                                      O2::ReconstructionDataFormats)
 
 o2_target_root_dictionary(DataFormatsMID

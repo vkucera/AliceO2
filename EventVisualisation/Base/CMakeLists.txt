@@ -16,6 +16,6 @@ o2_add_library(EventVisualisationBase
                PUBLIC_LINK_LIBRARIES ROOT::Eve
                                      O2::CCDB 
                                      O2::EventVisualisationDataConverter
-									 O2::DetectorsBase 
+                                     O2::DetectorsBase 
 
 )

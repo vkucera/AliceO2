@@ -13,5 +13,5 @@ o2_add_library(FDDBase
                PUBLIC_LINK_LIBRARIES O2::CommonConstants ROOT::Geom FairRoot::Base)
 
 o2_target_root_dictionary(FDDBase 
-			  HEADERS include/FDDBase/Geometry.h
-			          include/FDDBase/Constants.h)
+                          HEADERS include/FDDBase/Geometry.h
+                                  include/FDDBase/Constants.h)

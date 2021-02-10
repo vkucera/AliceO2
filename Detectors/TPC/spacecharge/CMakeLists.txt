@@ -39,7 +39,7 @@ o2_add_test_root_macro(macro/createResidualDistortionObject.C
 
 
 install(FILES macro/createSCHistosFromHits.C
-	DESTINATION share/macro/)
+        DESTINATION share/macro/)
 
 o2_add_test_root_macro(macro/createSCHistosFromHits.C
                       PUBLIC_LINK_LIBRARIES O2::TPCSpaceCharge

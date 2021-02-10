@@ -18,7 +18,7 @@ o2_add_library(DetectorsVertexing
                        src/SVertexerParams.cxx
                        src/V0Hypothesis.cxx
                PUBLIC_LINK_LIBRARIES ROOT::Core
-	                             O2::CommonUtils
+                                     O2::CommonUtils
                                      O2::ReconstructionDataFormats
                                      O2::DataFormatsTPC
                                      O2::DataFormatsITS

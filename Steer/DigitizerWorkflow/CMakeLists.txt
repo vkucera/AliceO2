@@ -60,7 +60,7 @@ o2_add_executable(digitizer-workflow
 o2_add_executable(mctruth-testworkflow
                   COMPONENT_NAME sim
                   SOURCES src/MCTruthTestWorkflow.cxx
-		          src/MCTruthSourceSpec.cxx
-	                  src/MCTruthWriterSpec.cxx
+                          src/MCTruthSourceSpec.cxx
+                          src/MCTruthWriterSpec.cxx
                   PUBLIC_LINK_LIBRARIES O2::Framework
                                         O2::SimulationDataFormat)

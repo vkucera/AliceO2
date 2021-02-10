@@ -20,7 +20,7 @@ o2_add_library(EMCALReconstruction
                        src/CaloRawFitter.cxx
                        src/CaloRawFitterStandard.cxx
                        src/CaloRawFitterGamma2.cxx
-		       src/ClusterizerParameters.cxx 
+                       src/ClusterizerParameters.cxx 
                        src/Clusterizer.cxx 
                        src/ClusterizerTask.cxx
                        src/DigitReader.cxx

@@ -25,7 +25,7 @@ target_link_libraries(allsim
                                 O2::Field
                                 O2::HMPIDSimulation
                                 O2::ITSSimulation
-				                        O2::MCHBase
+                                O2::MCHBase
                                 O2::MCHSimulation
                                 O2::MFTSimulation
                                 O2::MIDSimulation
@@ -199,10 +199,10 @@ o2_add_test_wrapper(NAME o2sim_hepmc
                                       2
                                      -j
                                       2
-				      -g
-				      hepmc
-				      --configKeyValues
-				      "HepMC.fileName=${CMAKE_SOURCE_DIR}/Generators/share/data/pythia.hepmc;HepMC.version=2"
+                                      -g
+                                      hepmc
+                                      --configKeyValues
+                                      "HepMC.fileName=${CMAKE_SOURCE_DIR}/Generators/share/data/pythia.hepmc;HepMC.version=2"
                                       -o
                                       o2simhepmc
                     LABELS long sim hepmc3

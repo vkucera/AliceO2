@@ -18,9 +18,9 @@ o2_add_library(ITSMFTSimulation
                        src/AlpideSignalTrapezoid.cxx
                        src/ClusterShape.cxx
                        src/DPLDigitizerParam.cxx
-		       src/MC2RawEncoder.cxx
-		PUBLIC_LINK_LIBRARIES O2::SimulationDataFormat O2::ITSMFTBase
-		                      O2::ITSMFTReconstruction
+                       src/MC2RawEncoder.cxx
+                PUBLIC_LINK_LIBRARIES O2::SimulationDataFormat O2::ITSMFTBase
+                                      O2::ITSMFTReconstruction
                                       O2::DataFormatsITSMFT O2::DetectorsRaw)
 
 o2_target_root_dictionary(
@@ -35,8 +35,8 @@ o2_target_root_dictionary(
           include/ITSMFTSimulation/AlpideSignalTrapezoid.h
           include/ITSMFTSimulation/ClusterShape.h
           include/ITSMFTSimulation/DPLDigitizerParam.h
-	  include/ITSMFTSimulation/MC2RawEncoder.h
-	  )
+          include/ITSMFTSimulation/MC2RawEncoder.h
+          )
 
 o2_add_test(AlpideSimResponse
             SOURCES test/testAlpideSimResponse.cxx

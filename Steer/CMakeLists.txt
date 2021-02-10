@@ -11,10 +11,10 @@
 o2_add_library(Steer
                SOURCES src/O2MCApplication.cxx src/InteractionSampler.cxx
                        src/HitProcessingManager.cxx src/MCKinematicsReader.cxx
-		       PUBLIC_LINK_LIBRARIES O2::CommonDataFormat
-		                     O2::CommonConstants
-                                     O2::SimulationDataFormat
-                                     O2::DetectorsCommonDataFormats)
+                       PUBLIC_LINK_LIBRARIES O2::CommonDataFormat
+                                             O2::CommonConstants
+                                             O2::SimulationDataFormat
+                                             O2::DetectorsCommonDataFormats)
 
 o2_target_root_dictionary(Steer
                           HEADERS include/Steer/InteractionSampler.h

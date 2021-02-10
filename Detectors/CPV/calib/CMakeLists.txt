@@ -12,7 +12,7 @@ o2_add_library(CPVCalib
                SOURCES src/BadChannelMap.cxx
                        src/CalibParams.cxx
                        src/Pedestals.cxx
-	       PUBLIC_LINK_LIBRARIES O2::CCDB O2::CPVBase)
+               PUBLIC_LINK_LIBRARIES O2::CCDB O2::CPVBase)
 
 o2_target_root_dictionary(CPVCalib
                           HEADERS include/CPVCalib/BadChannelMap.h

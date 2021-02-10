@@ -22,15 +22,15 @@ if (FlukaVMC_FOUND)
   message(STATUS "BUILDING WITH FLUKA")
   o2_add_library(FLUKASetup
                  SOURCES src/FlukaConfig.cxx
-       	         PUBLIC_LINK_LIBRARIES MC::FlukaVMC FairRoot::Base O2::SimulationDataFormat O2::Generators ROOT::EGPythia6
-	        )
+                 PUBLIC_LINK_LIBRARIES MC::FlukaVMC FairRoot::Base O2::SimulationDataFormat O2::Generators ROOT::EGPythia6
+                )
 else()
   message(STATUS "BUILDING WITHOUT FLUKA")
 endif (FlukaVMC_FOUND)
-	      
+              
 o2_add_library(SimSetup
                SOURCES  src/GlobalProcessCutSimParam.cxx src/SimSetup.cxx src/SetCuts.cxx
-	       PUBLIC_LINK_LIBRARIES O2::CommonUtils O2::DetectorsBase
+               PUBLIC_LINK_LIBRARIES O2::CommonUtils O2::DetectorsBase
               )
 
 o2_target_root_dictionary(SimSetup

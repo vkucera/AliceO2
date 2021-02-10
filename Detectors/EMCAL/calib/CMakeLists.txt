@@ -20,7 +20,7 @@ o2_add_library(EMCALCalib
                        src/TriggerSTUErrorCounter.cxx
                        src/TriggerDCS.cxx
                        src/CalibDB.cxx
-	       PUBLIC_LINK_LIBRARIES O2::CCDB O2::EMCALBase)
+               PUBLIC_LINK_LIBRARIES O2::CCDB O2::EMCALBase)
 
 o2_target_root_dictionary(EMCALCalib
                           HEADERS include/EMCALCalib/BadChannelMap.h

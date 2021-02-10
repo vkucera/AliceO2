@@ -30,4 +30,4 @@ o2_add_executable(digit-reader-workflow
 
 if(NOT APPLE)
  set_property(TARGET ${fitrecoexe} PROPERTY LINK_WHAT_YOU_USE ON)
-endif()    		
+endif()                    
