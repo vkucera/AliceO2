@@ -207,6 +207,8 @@ class RecoDecay
   /// \param angle  angle
     /// \param min  minimum of the range
     /// \return value within [min, min + 2π).
+    /// \return value within [min, min + 2π).
+    /// \return value within [min, min + 2π).
     /// \param angle  angle
   /// \param min  minimum of the range
   /// \return value within [min, min + 2π).
