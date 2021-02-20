@@ -195,16 +195,19 @@ class RecoDecay
   /// Calculates azimuth of a vector.
   /// \note Elements 0 and 1 are expected to represent the x and y vector components, respectively.
   /// \param vec  vector (container of elements accessible by index)
-  /// \return azimuth within [0, 2π]
+  /// \return azimuth within [0, 2π]    
   template <typename T>
   static double Phi(const T& vec)
   {
     return Phi(vec[0], vec[1]);
   }
-
+  
   /// Constrains angle to be within a range.
-  /// \note Inspired by TVector2::Phi_0_2pi in ROOT.
+  /// \note Inspired by TVector2::Phi_0_2pi in ROOT.  
   /// \param angle  angle
+    /// \param min  minimum of the range
+    /// \return value within [min, min + 2π).
+    /// \param angle  angle
   /// \param min  minimum of the range
   /// \return value within [min, min + 2π).
   template <typename T, typename U = float>
@@ -220,12 +223,12 @@ class RecoDecay
   }
 
   /// Calculates cosine of pointing angle.
-  /// \param posPV  {x, y, z} position of the primary vertex
+  /// \param posPV  {x, y, z} position of the primary vertex  
   /// \param posSV  {x, y, z} position of the secondary vertex
   /// \param mom  3-momentum array
   /// \return cosine of pointing angle
   template <typename T, typename U, typename V>
-  static double CPA(const T& posPV, const U& posSV, const array<V, 3>& mom)
+  static double CPA(const T& posPV, const U& posSV, const array<V, 3>& mom)   
   {
     // CPA = (l . p)/(|l| |p|)
     auto lineDecay = array{posSV[0] - posPV[0], posSV[1] - posPV[1], posSV[2] - posPV[2]};
