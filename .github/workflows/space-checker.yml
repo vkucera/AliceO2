@@ -14,6 +14,7 @@ jobs:
           fetch-depth: 0 # needed to get the full history
         run: |
           echo "Spaces"
+          echo "Spaces"
           echo "github.event.pull_request.head.ref ${{ github.event.pull_request.head.ref }}"
           echo "github.event.pull_request.head.sha  ${{ github.event.pull_request.head.sha }}"
           echo "github.head_ref ${{ github.head_ref }}"
