@@ -186,7 +186,7 @@ with section("format"):
 
   # If a positional argument group contains more than this many arguments, then
   # force it to a vertical layout.
-  max_pargs_hwrap = 1
+  max_pargs_hwrap = 10
 
   # If a cmdline positional group consumes more than this many lines without
   # nesting, then invalidate the layout (and nest)
@@ -231,7 +231,7 @@ with section("format"):
   keyword_case = 'upper'
 
   # A list of command names which should always be wrapped
-  always_wrap = []
+  always_wrap = ["SOURCES", "o2_add_library", "PUBLIC_LINK_LIBRARIES"]
 
   # If true, the argument lists which are known to be sortable will be sorted
   # lexicographicall
@@ -249,7 +249,15 @@ with section("format"):
 
   # A dictionary mapping layout nodes to a list of wrap decisions. See the
   # documentation for more information.
-  layout_passes = {}
+  #layout_passes = {}
+  layout_passes = {
+    "StatementNode": [(0, False), (5, False)], # good
+    #"KwargGroupNode": [(0, True),  (5, True)], # bad
+    #"KwargGroupNode": [(0, False), (4, True),  (5, False)],
+    "PargGroupNode": [(0, False), (5, False)]
+    #"StatementNode": [(0, False)]
+    #"StatementNode": [(5, False)]
+  }
 
 # ------------------------------------------------
 # Options affecting comment reflow and formatting.
