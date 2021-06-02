@@ -576,6 +576,7 @@ TTree* DataInputDirector::getDataTree(header::DataHeader dh, int counter, int nu
     treename = fileAndFolder.folderName + "/" + treename;
     tree = (TTree*)fileAndFolder.file->Get(treename.c_str());
     if (!tree) {
+      LOGP(FATAL, fmt::format(R"(Couldn't get TTree "{}" from "{}")", treename, fileAndFolder.file->GetName()));
       throw std::runtime_error(fmt::format(R"(Couldn't get TTree "{}" from "{}")", treename, fileAndFolder.file->GetName()));
     }
   }
