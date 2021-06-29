@@ -40,13 +40,13 @@ namespace hf_selcandidate_jpsi
 {
 DECLARE_SOA_COLUMN(IsSelJpsiToEE, isSelJpsiToEE, int); //!
 DECLARE_SOA_COLUMN(IsSelJpsiToMuMu, isSelJpsiToMuMu, int); //!
-DECLARE_SOA_COLUMN(IsSelJpsiToEETopol, isSelJpsiToEETopol, int); //!
-DECLARE_SOA_COLUMN(IsSelJpsiToEETpc, isSelJpsiToEETpc, int); //!
-DECLARE_SOA_COLUMN(IsSelJpsiToEETof, isSelJpsiToEETof, int); //!
-DECLARE_SOA_COLUMN(IsSelJpsiToEERich, isSelJpsiToEERich, int); //!
+DECLARE_SOA_COLUMN(IsSelJpsiToEETopol, isSelJpsiToEETopol, int);     //!
+DECLARE_SOA_COLUMN(IsSelJpsiToEETpc, isSelJpsiToEETpc, int);         //!
+DECLARE_SOA_COLUMN(IsSelJpsiToEETof, isSelJpsiToEETof, int);         //!
+DECLARE_SOA_COLUMN(IsSelJpsiToEERich, isSelJpsiToEERich, int);       //!
 DECLARE_SOA_COLUMN(IsSelJpsiToEETofRich, isSelJpsiToEETofRich, int); //!
 DECLARE_SOA_COLUMN(IsSelJpsiToMuMuTopol, isSelJpsiToMuMuTopol, int); //!
-DECLARE_SOA_COLUMN(IsSelJpsiToMuMuMid, isSelJpsiToMuMuMid, int); //!
+DECLARE_SOA_COLUMN(IsSelJpsiToMuMuMid, isSelJpsiToMuMuMid, int);     //!
 } // namespace hf_selcandidate_jpsi
 DECLARE_SOA_TABLE(HFSelJpsiCandidate, "AOD", "HFSELJPSICAND", //!
                   hf_selcandidate_jpsi::IsSelJpsiToEE,

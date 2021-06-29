@@ -178,7 +178,7 @@ struct HfJpsiCandidateSelector {
         selectedMuMuTopol = 0;
         selectedEE = 0;
         selectedMuMu = 0;
-      //if (!selectionTopol(candidate, trackPos, trackNeg, selectedEE, selectedMuMu)) {
+        //if (!selectionTopol(candidate, trackPos, trackNeg, selectedEE, selectedMuMu)) {
         //hfSelJpsiCandidate(0, 0);
         //continue;
       }
@@ -257,19 +257,19 @@ struct HfJpsiCandidateSelector {
         selectedMuMuTopol = 0;
         selectedEE = 0;
         selectedMuMu = 0;
-      //if (!selectionTopol(candidate, trackPos, trackNeg, selectedEE, selectedMuMu)) {
+        //if (!selectionTopol(candidate, trackPos, trackNeg, selectedEE, selectedMuMu)) {
         //hfSelJpsiCandidate(0, 0);
         //continue;
       }
 
       //if (selectENotPi) {
-        // combined TOF + RICH e selection with π rejection
-        if (!selectorElectron.isElectronAndNotPion(trackPos) ||
-            !selectorElectron.isElectronAndNotPion(trackNeg)) {
-          selectedEETofRich = 0;
-          selectedEE = 0;
+      // combined TOF + RICH e selection with π rejection
+      if (!selectorElectron.isElectronAndNotPion(trackPos) ||
+          !selectorElectron.isElectronAndNotPion(trackNeg)) {
+        selectedEETofRich = 0;
+        selectedEE = 0;
         }
-      //} else {
+        //} else {
         // track-level electron PID TOF selection
         if (selectorElectron.getStatusTrackPIDTOF(trackPos) == TrackSelectorPID::Status::PIDRejected ||
             selectorElectron.getStatusTrackPIDTOF(trackNeg) == TrackSelectorPID::Status::PIDRejected) {
@@ -287,18 +287,18 @@ struct HfJpsiCandidateSelector {
           selectedEERich = 0;
           selectedEE = 0;
         }
-      //}
+        //}
 
-      //if (selectedEE == 0 && selectedMuMu == 0) {
-      //  hfSelJpsiCandidate(0, 0);
-      //  continue;
-      //}
+        //if (selectedEE == 0 && selectedMuMu == 0) {
+        //  hfSelJpsiCandidate(0, 0);
+        //  continue;
+        //}
 
-      // track-level muon PID MID selection
-      if (selectorMuon.getStatusTrackPIDMID(trackPos) != TrackSelectorPID::Status::PIDAccepted ||
-          selectorMuon.getStatusTrackPIDMID(trackNeg) != TrackSelectorPID::Status::PIDAccepted) {
-        selectedMuMuMid = 0;
-        selectedMuMu = 0;
+        // track-level muon PID MID selection
+        if (selectorMuon.getStatusTrackPIDMID(trackPos) != TrackSelectorPID::Status::PIDAccepted ||
+            selectorMuon.getStatusTrackPIDMID(trackNeg) != TrackSelectorPID::Status::PIDAccepted) {
+          selectedMuMuMid = 0;
+          selectedMuMu = 0;
       }
 
       hfSelJpsiCandidate(selectedEE,
