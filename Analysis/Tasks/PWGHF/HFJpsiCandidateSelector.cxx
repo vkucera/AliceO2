@@ -268,17 +268,17 @@ struct HfJpsiCandidateSelector {
           !selectorElectron.isElectronAndNotPion(trackNeg)) {
         selectedEETofRich = 0;
         selectedEE = 0;
-        }
-        //} else {
-        // track-level electron PID TOF selection
-        if (selectorElectron.getStatusTrackPIDTOF(trackPos) == TrackSelectorPID::Status::PIDRejected ||
-            selectorElectron.getStatusTrackPIDTOF(trackNeg) == TrackSelectorPID::Status::PIDRejected) {
-          selectedEETof = 0;
-          selectedEE = 0;
-          //if (selectedMuMu == 0) {
-          //  hfSelJpsiCandidate(0, 0);
-          //  continue;
-          //}
+      }
+      //} else {
+      // track-level electron PID TOF selection
+      if (selectorElectron.getStatusTrackPIDTOF(trackPos) == TrackSelectorPID::Status::PIDRejected ||
+          selectorElectron.getStatusTrackPIDTOF(trackNeg) == TrackSelectorPID::Status::PIDRejected) {
+        selectedEETof = 0;
+        selectedEE = 0;
+        //if (selectedMuMu == 0) {
+        //  hfSelJpsiCandidate(0, 0);
+        //  continue;
+        //}
         }
 
         // track-level electron PID RICH selection
@@ -299,18 +299,18 @@ struct HfJpsiCandidateSelector {
             selectorMuon.getStatusTrackPIDMID(trackNeg) != TrackSelectorPID::Status::PIDAccepted) {
           selectedMuMuMid = 0;
           selectedMuMu = 0;
-      }
+        }
 
-      hfSelJpsiCandidate(selectedEE,
-                         selectedMuMu,
-                         selectedEETopol,
-                         selectedEETpc,
-                         selectedEETof,
-                         selectedEERich,
-                         selectedEETofRich,
-                         selectedMuMuTopol,
-                         selectedMuMuMid);
-      //hfSelJpsiCandidate(selectedEE, selectedMuMu);
+        hfSelJpsiCandidate(selectedEE,
+                           selectedMuMu,
+                           selectedEETopol,
+                           selectedEETpc,
+                           selectedEETof,
+                           selectedEERich,
+                           selectedEETofRich,
+                           selectedMuMuTopol,
+                           selectedMuMuMid);
+        //hfSelJpsiCandidate(selectedEE, selectedMuMu);
     }
   }
 };
