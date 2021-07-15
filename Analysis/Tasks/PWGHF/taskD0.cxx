@@ -119,8 +119,8 @@ struct TaskD0MC {
      {"hPtGenPrompt", "MC particles (matched, prompt);#it{p}_{T}^{gen.} (GeV/#it{c});entries", {HistType::kTH1F, {{100, 0., 10.}}}},
      {"hPtGenNonPrompt", "MC particles (matched, non-prompt);#it{p}_{T}^{gen.} (GeV/#it{c});entries", {HistType::kTH1F, {{100, 0., 10.}}}},
      {"hPtGenSig", "2-prong candidates (matched);#it{p}_{T}^{gen.} (GeV/#it{c});entries", {HistType::kTH1F, {{100, 0., 10.}}}},
-     {"hCPARecSig", "2-prong candidates (matched);cosine of pointing angle;entries", {HistType::kTH1F, {{110, -1.1, 1.1}}}},
-     {"hCPARecBg", "2-prong candidates (unmatched);cosine of pointing angle;entries", {HistType::kTH1F, {{110, -1.1, 1.1}}}},
+     //{"hCPARecSig", "2-prong candidates (matched);cosine of pointing angle;entries", {HistType::kTH1F, {{110, -1.1, 1.1}}}},
+     //{"hCPARecBg", "2-prong candidates (unmatched);cosine of pointing angle;entries", {HistType::kTH1F, {{110, -1.1, 1.1}}}},
      {"hEtaRecSig", "2-prong candidates (matched);#it{#eta};entries", {HistType::kTH1F, {{100, -2., 2.}}}},
      {"hEtaRecBg", "2-prong candidates (unmatched);#it{#eta};entries", {HistType::kTH1F, {{100, -2., 2.}}}},
      {"hEtaGen", "MC particles (matched);#it{#eta};entries", {HistType::kTH1F, {{100, -2., 2.}}}}}};
@@ -128,6 +128,14 @@ struct TaskD0MC {
   Configurable<int> d_selectionFlagD0{"d_selectionFlagD0", 1, "Selection Flag for D0"};
   Configurable<int> d_selectionFlagD0bar{"d_selectionFlagD0bar", 1, "Selection Flag for D0bar"};
   Configurable<double> cutYCandMax{"cutYCandMax", -1., "max. cand. rapidity"};
+  Configurable<std::vector<double>> bins{"pTBins", std::vector<double>{hf_cuts_d0_topik::pTBins_v}, "pT bin limits"};
+
+  void init(o2::framework::InitContext&)
+  {
+    auto vbins = (std::vector<double>)bins;
+    registry.add("hCPARecSig", "2-prong candidates (matched);cosine of pointing angle;entries", {HistType::kTH2F, {{110, -1.1, 1.1}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
+    registry.add("hCPARecBg", "2-prong candidates (unmatched);cosine of pointing angle;entries", {HistType::kTH2F, {{110, -1.1, 1.1}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
+  }
 
   Filter filterSelectCandidates = (aod::hf_selcandidate_d0::isSelD0 >= d_selectionFlagD0 || aod::hf_selcandidate_d0::isSelD0bar >= d_selectionFlagD0bar);
 
@@ -155,11 +163,13 @@ struct TaskD0MC {
         } else {
           registry.fill(HIST("hPtRecSigNonPrompt"), ptRec); // rec. level pT, non-prompt
         }
-        registry.fill(HIST("hCPARecSig"), candidate.cpa());
+        //registry.fill(HIST("hCPARecSig"), candidate.cpa());
+        registry.fill(HIST("hCPARecSig"), candidate.cpa(), candidate.pt());
         registry.fill(HIST("hEtaRecSig"), candidate.eta());
       } else {
         registry.fill(HIST("hPtRecBg"), candidate.pt());
-        registry.fill(HIST("hCPARecBg"), candidate.cpa());
+        //registry.fill(HIST("hCPARecBg"), candidate.cpa());
+        registry.fill(HIST("hCPARecBg"), candidate.cpa(), candidate.pt());
         registry.fill(HIST("hEtaRecBg"), candidate.eta());
       }
     }
