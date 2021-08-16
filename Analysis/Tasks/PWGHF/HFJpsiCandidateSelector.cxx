@@ -140,6 +140,7 @@ struct HfJpsiCandidateSelector {
 
   void processAlice2(aod::HfCandProng2 const& candidates, aod::BigTracksPID const&)
   {
+    Printf("Process ALICE 2");
     TrackSelectorPID selectorElectron(kElectron);
     selectorElectron.setRangePtTPC(d_pidTPCMinpT, d_pidTPCMaxpT);
     selectorElectron.setRangeNSigmaTPC(-d_nSigmaTPC, d_nSigmaTPC);
@@ -219,6 +220,7 @@ struct HfJpsiCandidateSelector {
 
   void processAlice3(aod::HfCandProng2 const& candidates, TracksPID const&, aod::RICHs const&, aod::MIDs const&)
   {
+    Printf("Process ALICE 3");
     TrackSelectorPID selectorElectron(kElectron);
     selectorElectron.setRangePtTPC(d_pidTPCMinpT, d_pidTPCMaxpT);
     selectorElectron.setRangeNSigmaTPC(-d_nSigmaTPC, d_nSigmaTPC);
@@ -325,10 +327,12 @@ WorkflowSpec defineDataProcessing(ConfigContext const& cfgc)
   WorkflowSpec workflow{};
   const bool isAlice3 = cfgc.options().get<bool>("isAlice3");
   if (isAlice3) {
+    Printf("Adding ALICE 3 process");
     workflow.push_back(adaptAnalysisTask<Alice3PidIndexBuilder>(cfgc));
     workflow.push_back(adaptAnalysisTask<HfJpsiCandidateSelector>(cfgc, SetDefaultProcesses{{{"processAlice2", false}, {"processAlice3", true}}}));
   } else {
-    workflow.push_back(adaptAnalysisTask<HfJpsiCandidateSelector>(cfgc));
+    Printf("Adding ALICE 2 process");
+    workflow.push_back(adaptAnalysisTask<HfJpsiCandidateSelector>(cfgc, SetDefaultProcesses{{{"processAlice2", true}, {"processAlice3", false}}}));
   }
   return workflow;
 }

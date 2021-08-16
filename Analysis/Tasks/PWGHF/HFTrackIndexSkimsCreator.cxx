@@ -98,6 +98,7 @@ struct HfTagSelCollisions {
   // event selection
   void processEvSel(soa::Join<aod::Collisions, aod::EvSels>::iterator const& collision)
   {
+    Printf("Process event selection");
     int statusCollision = 0;
 
     if (fillHistograms) {
@@ -127,6 +128,7 @@ struct HfTagSelCollisions {
   // no event selection in case of no event-selection task attached
   void processNoEvSel(aod::Collision const&)
   {
+    Printf("Process NO event selection");
     int statusCollision = 0;
 
     if (fillHistograms) {

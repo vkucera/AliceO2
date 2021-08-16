@@ -1537,9 +1537,9 @@ int runStateMachine(DataProcessorSpecs const& workflow,
               }
             }
             /// FIXME: use commandline arguments as alternative
-            LOGF(DEBUG, "Original inputs: ");
+            LOGF(INFO, "Original inputs: ");
             for (auto& input : device.inputs) {
-              LOGF(DEBUG, "-> %s", input.binding);
+              LOGF(INFO, "-> %s", input.binding);
             }
             auto end = device.inputs.end();
             auto new_end = std::remove_if(device.inputs.begin(), device.inputs.end(), [](InputSpec& input) {
@@ -1551,9 +1551,9 @@ int runStateMachine(DataProcessorSpecs const& workflow,
               });
             });
             device.inputs.erase(new_end, end);
-            LOGF(DEBUG, "Adjusted inputs: ");
+            LOGF(INFO, "Adjusted inputs: ");
             for (auto& input : device.inputs) {
-              LOGF(DEBUG, "-> %s", input.binding);
+              LOGF(INFO, "-> %s", input.binding);
             }
             altered = true;
           }
