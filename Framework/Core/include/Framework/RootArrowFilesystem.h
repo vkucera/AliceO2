@@ -30,7 +30,7 @@ namespace o2::framework
 
 struct RootObjectHandler {
   RootObjectHandler(void* p, std::shared_ptr<arrow::dataset::FileFormat> f)
-    : payload(p), format(std::move(f))
+    : format(std::move(f)), payload(p)
   {
   }
 

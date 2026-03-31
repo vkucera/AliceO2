@@ -28,7 +28,7 @@ void ConfigParamsHelper::populateBoostProgramOptions(
   const std::vector<ConfigParamSpec>& specs,
   bpo::options_description vetos)
 {
-  auto proxy = options.add_options();
+  [[maybe_unused]] auto proxy = options.add_options();
   for (auto const& spec : specs) {
     // skip everything found in the veto definition
     if (vetos.find_nothrow(spec.name, false) != nullptr) {

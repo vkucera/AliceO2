@@ -47,7 +47,6 @@ void memunmask(char* data, size_t size, uint32_t mask)
 
 void encode_websocket_frames(std::vector<uv_buf_t>& outputs, char const* src, size_t size, WebSocketOpCode opcode, uint32_t mask)
 {
-  void* finalHeader;
   size_t headerSize;
   char* buffer = nullptr;
   char* startPayload = nullptr;
@@ -228,7 +227,6 @@ std::string encode_websocket_handshake_reply(char const* nonce, const char* prot
 
 void parse_http_request(char* start, size_t size, HTTPParser* parser)
 {
-  enum HTTPState state = HTTPState::IN_START;
   // Too short, let's try again...
   if (size < 2) {
     parser->remaining += std::string_view(start, size);

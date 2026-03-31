@@ -51,14 +51,7 @@ struct DataProcessingStates {
                        std::function<int64_t(int64_t base, int64_t offset)> getTimestamp);
 
   DataProcessingStates(DataProcessingStates const& other)
-    : getRealtimeBase(other.getRealtimeBase),
-      getTimestamp(other.getTimestamp),
-      statesSize(other.statesSize.load()),
-      lastInsertedState(other.lastInsertedState.load()),
-      nextState(other.nextState.load()),
-      pendingStates(other.pendingStates.load()),
-      generation(other.generation.load()),
-      updatedMetricsLapse(other.updatedMetricsLapse.load()),
+    : statesSize(other.statesSize.load()),
       store(other.store),
       statesBuffer(other.statesBuffer),
       statesViews(other.statesViews),
@@ -66,7 +59,14 @@ struct DataProcessingStates {
       enabled(other.enabled),
       stateNames(other.stateNames),
       updateInfos(other.updateInfos),
-      stateSpecs(other.stateSpecs)
+      stateSpecs(other.stateSpecs),
+      lastInsertedState(other.lastInsertedState.load()),
+      nextState(other.nextState.load()),
+      pendingStates(other.pendingStates.load()),
+      getRealtimeBase(other.getRealtimeBase),
+      getTimestamp(other.getTimestamp),
+      generation(other.generation.load()),
+      updatedMetricsLapse(other.updatedMetricsLapse.load())
   {
   }
 

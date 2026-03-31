@@ -377,7 +377,7 @@ struct WorkflowImporter : public rapidjson::BaseReaderHandler<rapidjson::UTF8<>,
     } else if (in(State::IN_INPUT_MATCHER) && inputMatcherNodes.size() > 1) {
       data_matcher::Node child = std::move(inputMatcherNodes.back());
       inputMatcherNodes.pop_back();
-      auto* matcher = std::get_if<std::unique_ptr<DataDescriptorMatcher>>(&child);
+      [[maybe_unused]] auto* matcher = std::get_if<std::unique_ptr<DataDescriptorMatcher>>(&child);
       assert(matcher != nullptr);
       auto* parent = std::get_if<std::unique_ptr<DataDescriptorMatcher>>(&inputMatcherNodes.back());
       assert(parent != nullptr);

@@ -156,7 +156,7 @@ struct DataRefUtils {
 
         typename RSS::FairInputTBuffer ftm(const_cast<char*>(ref.payload), payloadSize);
         ftm.InitMap();
-        auto* classInfo = ftm.ReadClass();
+        [[maybe_unused]] auto* classInfo = ftm.ReadClass();
         ftm.SetBufferOffset(0);
         ftm.ResetMap();
         result.reset(static_cast<wrapped*>(ftm.ReadObjectAny(cl)));

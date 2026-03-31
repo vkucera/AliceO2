@@ -865,7 +865,7 @@ auto arrowTypeFromROOT(EDataType type, int size)
       case -1:
         return arrow::list(type);
       case 1:
-        return std::move(type);
+        return type;
       default:
         return arrow::fixed_size_list(type, size);
     }
@@ -1060,12 +1060,10 @@ class TTreeFileWriter : public arrow::dataset::FileWriter
       auto& field = schema->field(i);
       listSizes.push_back(1);
 
-      int valuesIdealBasketSize = 0;
       // Construct all the needed branches.
       switch (field->type()->id()) {
         case arrow::Type::FIXED_SIZE_LIST: {
           listSizes.back() = std::static_pointer_cast<arrow::FixedSizeListType>(field->type())->list_size();
-          valuesIdealBasketSize = 1024 + valueTypes.back()->byte_width() * listSizes.back();
           valueTypes.push_back(field->type()->field(0)->type());
           sizesBranches.push_back(nullptr);
           std::string leafList = fmt::format("{}[{}]{}", field->name(), listSizes.back(), rootSuffixFromArrow(valueTypes.back()->id()));

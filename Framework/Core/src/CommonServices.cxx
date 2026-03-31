@@ -777,7 +777,7 @@ o2::framework::ServiceSpec
         return;
       }
       auto& queue = services.get<AsyncQueue>();
-      const auto& state = services.get<DeviceState>();
+      [[maybe_unused]] const auto& state = services.get<DeviceState>();
       /// We use the oldest possible timeslice to debounce, so that only the latest one
       /// at the end of one iteration is sent.
       O2_SIGNPOST_EVENT_EMIT(data_processor_context, cid, "oldest_possible_timeslice", "Queueing oldest possible timeslice %" PRIu64 " propagation for execution.",
@@ -834,7 +834,7 @@ auto sendRelayerMetrics(ServiceRegistryRef registry, DataProcessingStats& stats)
   // Derive the amount of shared memory used
   auto& runningWorkflow = registry.get<RunningWorkflowInfo const>();
   using namespace fair::mq::shmem;
-  auto& spec = registry.get<DeviceSpec const>();
+  [[maybe_unused]] auto& spec = registry.get<DeviceSpec const>();
 
   // FIXME: Ugly, but we do it only every 5 seconds...
   if (stats.hasAvailSHMMetric) {
@@ -1346,7 +1346,7 @@ o2::framework::ServiceSpec CommonServices::guiMetricsSpec()
       auto& monitoring = context.services().get<Monitoring>();
       auto& spec = context.services().get<DeviceSpec const>();
       auto oldestPossibleOutput = relayer.getOldestPossibleOutput();
-      for (size_t ci; ci < spec.outputChannels.size(); ++ci) {
+      for (size_t ci = 0; ci < spec.outputChannels.size(); ++ci) {
         monitoring.send({(uint64_t)oldestPossibleOutput.timeslice.value, fmt::format("oldest_possible_output/{}", ci), o2::monitoring::Verbosity::Debug});
       } },
     .domainInfoUpdated = [](ServiceRegistryRef registry, size_t timeslice, ChannelIndex channel) {

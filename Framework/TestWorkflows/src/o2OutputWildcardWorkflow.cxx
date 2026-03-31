@@ -38,7 +38,7 @@ WorkflowSpec defineDataProcessing(ConfigContext const& specs)
        [](DataAllocator& outputs) {
          auto rn = rand() % 5;
          std::this_thread::sleep_for(std::chrono::seconds(rn));
-         auto& aData = outputs.make<int>(OutputRef{"a1", static_cast<DataAllocator::SubSpecificationType>(rn)});
+         [[maybe_unused]] auto& aData = outputs.make<int>(OutputRef{"a1", static_cast<DataAllocator::SubSpecificationType>(rn)});
          LOGP(info, "A random subspec:{}", rn);
        })}},
     {"B",

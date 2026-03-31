@@ -18,8 +18,8 @@ namespace o2::framework
 {
 
 TimesliceIndex::TimesliceIndex(size_t maxLanes, std::vector<InputChannelInfo>& channels)
-  : mMaxLanes{maxLanes},
-    mChannels{channels}
+  : mChannels{channels},
+    mMaxLanes{maxLanes}
 {
 }
 

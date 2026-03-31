@@ -395,7 +395,7 @@ class DCAFitterN
   mutable LogLogThrottler mLoggerBadProp{};
   mutable LogLogThrottler mLoggerBadPCACov{};
   MatSym3D mWeightInv; // inverse weight of single track, [sum{M^T E M}]^-1 in EQ.T
-  std::array<int, MAXHYP> mOrder{0};
+  std::array<int, MAXHYP> mOrder{};
   int mCurHyp = 0;
   int mCrossIDCur = 0;
   int mCrossIDAlt = -1;
@@ -778,7 +778,6 @@ GPUd() bool DCAFitterN<N, Args...>::recalculatePCAWithErrors(int cand)
       return false;
     }
   }
-  auto oldPCA = mPCA[mOrder[cand]];
   calcPCA();
   mCurHyp = saveCurHyp;
   return true;
@@ -1277,12 +1276,12 @@ GPUd() void DCAFitterN<N, Args...>::print() const
 template <int N, typename... Args>
 GPUd() o2::track::TrackParCov DCAFitterN<N, Args...>::createParentTrackParCov(int cand, bool sectorAlpha) const
 {
-  std::array<float, 21> covV = {0.};
-  std::array<float, 3> pvecV = {0.};
+  std::array<float, 21> covV{};
+  std::array<float, 3> pvecV{};
   int q = 0;
   for (int it = 0; it < N; it++) {
     const auto& trc = getTrack(it, cand);
-    std::array<float, 3> pvecT = {0.};
+    std::array<float, 3> pvecT{};
     const bool hasMomentum = trc.getPxPyPzGlo(pvecT);
 
     // Propagate only the native momentum-parameter covariance
@@ -1335,21 +1334,19 @@ GPUd() o2::track::TrackParCov DCAFitterN<N, Args...>::createParentTrackParCov(in
 template <int N, typename... Args>
 GPUd() o2::track::TrackPar DCAFitterN<N, Args...>::createParentTrackPar(int cand, bool sectorAlpha) const
 {
-  const auto& trP = getTrack(0, cand);
-  const auto& trN = getTrack(1, cand);
   const auto& wvtx = getPCACandidate(cand);
-  std::array<float, 3> pvecV = {0.};
+  std::array<float, 3> pvecV{};
   int q = 0;
   for (int it = 0; it < N; it++) {
     const auto& trc = getTrack(it, cand);
-    std::array<float, 3> pvecT = {0.};
+    std::array<float, 3> pvecT{};
     trc.getPxPyPzGlo(pvecT);
     for (int i = 0; i < 3; i++) {
       pvecV[i] += pvecT[i];
     }
     q += trc.getCharge();
   }
-  const std::array<float, 3> vertex = {(float)wvtx[0], (float)wvtx[1], (float)wvtx[2]};
+  const std::array<float, 3> vertex = {static_cast<float>(wvtx[0]), static_cast<float>(wvtx[1]), static_cast<float>(wvtx[2])};
   return o2::track::TrackPar(vertex, pvecV, q, sectorAlpha);
 }
 

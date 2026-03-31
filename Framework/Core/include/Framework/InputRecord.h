@@ -493,7 +493,7 @@ class InputRecord
   {
     auto ref = getRef(binding, part);
     auto header = DataRefUtils::getHeader<header::DataHeader*>(ref);
-    auto payloadSize = DataRefUtils::getPayloadSize(ref);
+    [[maybe_unused]] auto payloadSize = DataRefUtils::getPayloadSize(ref);
     auto method = header->payloadSerializationMethod;
     if (method != header::gSerializationMethodCCDB) {
       throw runtime_error("Attempt to extract metadata from a non-CCDB serialised message");

@@ -26,8 +26,8 @@ namespace o2::framework
 
 DataProcessingStates::DataProcessingStates(std::function<void(int64_t& base, int64_t& offset)> getRealtimeBase_,
                                            std::function<int64_t(int64_t base, int64_t offset)> getTimestamp_)
-  : getTimestamp(getTimestamp_),
-    getRealtimeBase(getRealtimeBase_)
+  : getRealtimeBase(getRealtimeBase_),
+    getTimestamp(getTimestamp_)
 {
   getRealtimeBase(realTimeBase, initialTimeOffset);
 }

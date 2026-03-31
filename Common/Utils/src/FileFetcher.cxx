@@ -33,7 +33,7 @@ namespace fs = std::filesystem;
 //____________________________________________________________
 FileFetcher::FileFetcher(const std::string& input, const std::string& selRegex, const std::string& remRegex,
                          const std::string& copyCmd, const std::string& copyDir)
-  : mCopyCmd(copyCmd), mCopyDirName(copyDir)
+  : mCopyDirName(copyDir), mCopyCmd(copyCmd)
 {
   if (!selRegex.empty()) {
     mSelRegex = std::make_unique<std::regex>(selRegex.c_str());
@@ -177,7 +177,7 @@ size_t FileFetcher::popFromQueue(bool discard)
 {
   // remove file from the queue, if requested and if it was copied, remove copy
   std::lock_guard<std::mutex> lock(mMtx);
-  const auto* ptr = mQueue.frontPtr();
+  [[maybe_unused]] const auto* ptr = mQueue.frontPtr();
   if (mQueue.empty()) {
     return -1ul;
   }
@@ -326,7 +326,6 @@ void FileFetcher::discardFile(const std::string& fname)
 bool FileFetcher::copyFile(size_t id)
 {
   // copy remote file to local setCopyDirName. Adaptation for Gvozden's code from SubTimeFrameFileSource::DataFetcherThread()
-  bool aliencpMode = false;
   std::string uuid{};
   std::vector<std::string> logsToClean;
   std::string dbgset{};

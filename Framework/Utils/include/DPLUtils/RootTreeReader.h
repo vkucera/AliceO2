@@ -512,13 +512,13 @@ class GenericRootTreeReader
     } else if constexpr (is_specialization_v<U, BranchDefinition>) {
       cargs.emplace_back(key_type(def.key), def.name);
       using type = BranchConfigurationElement<typename U::type, BASE>;
-      return std::move(createBranchConfiguration<0, type>(std::move(cargs), std::forward<Args>(args)...));
+      return createBranchConfiguration<0, type>(std::move(cargs), std::forward<Args>(args)...);
     } else if constexpr (sizeof...(Args) > 0) {
       const char* arg = getCharArg(std::forward<Args>(args)...);
       if (arg != nullptr && *arg != 0) {
         cargs.emplace_back(key_type(def), arg);
         using type = BranchConfigurationElement<void, BASE>;
-        return std::move(createBranchConfiguration<1, type>(std::move(cargs), std::forward<Args>(args)...));
+        return createBranchConfiguration<1, type>(std::move(cargs), std::forward<Args>(args)...);
       }
       throw std::runtime_error("expecting valid branch name string after key");
     } else {
@@ -533,7 +533,7 @@ class GenericRootTreeReader
   std::unique_ptr<BranchConfigurationInterface> createBranchConfiguration(ConstructorArgs&& cargs)
   {
     static_assert(skip == 0);
-    return std::move(std::make_unique<T>(cargs));
+    return std::make_unique<T>(cargs);
   }
 
   /// the input tree, using TChain to support multiple input files

@@ -192,7 +192,7 @@ ExpirationHandler::Creator LifetimeHelpers::timeDrivenCreation(std::vector<std::
         break;
     }
 
-    auto newOldest = index.setOldestPossibleInput({decongestion.nextEnumerationTimeslice}, channelIndex);
+    [[maybe_unused]] auto newOldest = index.setOldestPossibleInput({decongestion.nextEnumerationTimeslice}, channelIndex);
     index.updateOldestPossibleOutput(decongestion.nextEnumerationTimesliceRewinded);
     return slot;
   };

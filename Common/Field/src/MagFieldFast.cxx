@@ -71,7 +71,7 @@ bool MagFieldFast::LoadData(const string inpFName)
     return false;
   }
   std::string line;
-  int valI, component = -1, nParams = 0, header[4] = {-1, -1, -1, -1}; // iR, iZ, iQuadrant, nVal
+  int component = -1, nParams = 0, header[4] = {-1, -1, -1, -1}; // iR, iZ, iQuadrant, nVal
   SolParam* curParam = nullptr;
 
   while (std::getline(in, line)) {

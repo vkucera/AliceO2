@@ -99,56 +99,56 @@ auto Method(std::string method)
 } // namespace comp_stream_helpers
 
 icomp_stream::icomp_stream(std::string filename, CompressionMethod method)
-  : mStreamBuffer(), mInputFile(filename, std::ios_base::in | std::ios_base::binary), std::istream(&mStreamBuffer)
+  : std::istream(&mStreamBuffer), mStreamBuffer(), mInputFile(filename, std::ios_base::in | std::ios_base::binary)
 {
   comp_stream_helpers::pushDecompressor(mStreamBuffer, method);
   mStreamBuffer.push(mInputFile);
 }
 
 icomp_stream::icomp_stream(std::istream& backend, CompressionMethod method)
-  : mStreamBuffer(), mInputFile(), std::istream(&mStreamBuffer)
+  : std::istream(&mStreamBuffer), mStreamBuffer(), mInputFile()
 {
   comp_stream_helpers::pushDecompressor(mStreamBuffer, method);
   mStreamBuffer.push(backend);
 }
 
 icomp_stream::icomp_stream(std::string filename, std::string method)
-  : mStreamBuffer(), mInputFile(filename, std::ios_base::in | std::ios_base::binary), std::istream(&mStreamBuffer)
+  : std::istream(&mStreamBuffer), mStreamBuffer(), mInputFile(filename, std::ios_base::in | std::ios_base::binary)
 {
   comp_stream_helpers::pushDecompressor(mStreamBuffer, comp_stream_helpers::Method(method));
   mStreamBuffer.push(mInputFile);
 }
 
 icomp_stream::icomp_stream(std::istream& backend, std::string method)
-  : mStreamBuffer(), mInputFile(), std::istream(&mStreamBuffer)
+  : std::istream(&mStreamBuffer), mStreamBuffer(), mInputFile()
 {
   comp_stream_helpers::pushDecompressor(mStreamBuffer, comp_stream_helpers::Method(method));
   mStreamBuffer.push(backend);
 }
 
 ocomp_stream::ocomp_stream(std::string filename, CompressionMethod method)
-  : mStreamBuffer(), std::ostream(&mStreamBuffer)
+  : std::ostream(&mStreamBuffer), mStreamBuffer()
 {
   comp_stream_helpers::pushCompressor(mStreamBuffer, method);
   mStreamBuffer.push(boost::iostreams::file_sink(filename));
 }
 
 ocomp_stream::ocomp_stream(std::ostream& backend, CompressionMethod method)
-  : mStreamBuffer(), std::ostream(&mStreamBuffer)
+  : std::ostream(&mStreamBuffer), mStreamBuffer()
 {
   comp_stream_helpers::pushCompressor(mStreamBuffer, method);
   mStreamBuffer.push(backend);
 }
 
 ocomp_stream::ocomp_stream(std::string filename, std::string method)
-  : mStreamBuffer(), std::ostream(&mStreamBuffer)
+  : std::ostream(&mStreamBuffer), mStreamBuffer()
 {
   comp_stream_helpers::pushCompressor(mStreamBuffer, comp_stream_helpers::Method(method));
   mStreamBuffer.push(boost::iostreams::file_sink(filename));
 }
 
 ocomp_stream::ocomp_stream(std::ostream& backend, std::string method)
-  : mStreamBuffer(), std::ostream(&mStreamBuffer)
+  : std::ostream(&mStreamBuffer), mStreamBuffer()
 {
   comp_stream_helpers::pushCompressor(mStreamBuffer, comp_stream_helpers::Method(method));
   mStreamBuffer.push(backend);

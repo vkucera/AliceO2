@@ -999,7 +999,7 @@ std::vector<std::vector<fair::mq::MessagePtr>> DataRelayer::consumeExistingInput
     copyHeaderPayloadToOutput(slot, ai);
   }
 
-  return std::move(messages);
+  return messages;
 }
 
 void DataRelayer::clear()

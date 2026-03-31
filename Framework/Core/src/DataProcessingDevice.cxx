@@ -621,8 +621,7 @@ static auto forwardInputs = [](ServiceRegistryRef registry, TimesliceSlot slot, 
 
 static auto cleanEarlyForward = [](ServiceRegistryRef registry, TimesliceSlot slot, std::vector<std::span<fair::mq::MessagePtr>>& currentSetOfInputs,
                                    TimesliceIndex::OldestOutputInfo oldestTimeslice, bool copy, bool consume = true) {
-  auto& proxy = registry.get<FairMQDeviceProxy>();
-
+  [[maybe_unused]] auto& proxy = registry.get<FairMQDeviceProxy>();
   O2_SIGNPOST_ID_GENERATE(sid, forwarding);
   O2_SIGNPOST_START(forwarding, sid, "forwardInputs", "Cleaning up slot %zu with oldestTimeslice %zu %{public}s%{public}s%{public}s",
                     slot.index, oldestTimeslice.timeslice.value, copy ? "with copy" : "", copy && consume ? " and " : "", consume ? "with consume" : "");
@@ -675,7 +674,7 @@ void DataProcessingDevice::initPollers()
   // We add a timer only in case a channel poller is not there.
   if ((context.statefulProcess != nullptr) || (context.statelessProcess != nullptr)) {
     for (auto& [channelName, channel] : GetChannels()) {
-      InputChannelInfo* channelInfo;
+      InputChannelInfo* channelInfo{};
       for (size_t ci = 0; ci < spec.inputChannels.size(); ++ci) {
         auto& channelSpec = spec.inputChannels[ci];
         channelInfo = &state.inputChannelInfos[ci];
@@ -1835,7 +1834,7 @@ void DataProcessingDevice::handleData(ServiceRegistryRef ref, InputChannelInfo& 
   // This is the same id as the upper level function, so we get the events
   // associated with the same interval. We will simply use "handle_data" as
   // the category.
-  O2_SIGNPOST_ID_FROM_POINTER(cid, device, &info);
+  // O2_SIGNPOST_ID_FROM_POINTER(cid, device, &info);
 
   // This is how we validate inputs. I.e. we try to enforce the O2 Data model
   // and we do a few stats. We bind parts as a lambda captured variable, rather
@@ -1950,7 +1949,6 @@ void DataProcessingDevice::handleData(ServiceRegistryRef ref, InputChannelInfo& 
     // available.
     bool hasBackpressure = false;
     size_t minBackpressureTimeslice = -1;
-    bool hasData = false;
     size_t oldestPossibleTimeslice = -1;
     static std::vector<int> ordering;
     // Same as inputInfos but with iota.
@@ -1969,7 +1967,6 @@ void DataProcessingDevice::handleData(ServiceRegistryRef ref, InputChannelInfo& 
       auto const& input = inputInfos[ordering[ii]];
       switch (input.type) {
         case InputType::Data: {
-          hasData = true;
           auto headerIndex = input.position;
           auto nMessages = 0;
           auto nPayloadsPerHeader = 0;

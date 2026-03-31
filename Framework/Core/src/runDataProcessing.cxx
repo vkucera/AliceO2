@@ -241,8 +241,8 @@ void getChildData(int infd, DeviceInfo& outinfo)
   int bytes_read;
   // NOTE: do not quite understand read ends up blocking if I read more than
   //        once. Oh well... Good enough for now.
-  int64_t total_bytes_read = 0;
-  int64_t count = 0;
+  // int64_t total_bytes_read = 0;
+  // int64_t count = 0;
   bool once = false;
   while (true) {
     bytes_read = read(infd, buffer, 1024 * 16);
@@ -257,7 +257,7 @@ void getChildData(int infd, DeviceInfo& outinfo)
     }
     assert(bytes_read > 0);
     outinfo.unprinted.append(buffer, bytes_read);
-    count++;
+    // count++;
   }
 }
 

@@ -209,7 +209,7 @@ int main(int argc, char* argv[])
       break;
     }
     // TrackQA
-    TTree* trackQA;
+    TTree* trackQA{};
     if (hasTrackQA && (trackQA = (TTree*)inputFile->Get(Form("%s/%s", dfName, trackQAName.Data()))) == nullptr) {
       exitCode = 20;
       break;

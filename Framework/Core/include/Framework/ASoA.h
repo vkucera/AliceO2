@@ -506,11 +506,11 @@ class ColumnIterator : ChunkingPolicy
   /// it. This means that a ColumnIterator is actually only available
   /// as part of a RowView.
   ColumnIterator(arrow::ChunkedArray const* column)
-    : mColumn{column},
-      mCurrent{nullptr},
+    : mCurrent{nullptr},
       mCurrentPos{nullptr},
       mGlobalOffset{nullptr},
       mLast{nullptr},
+      mColumn{column},
       mFirstIndex{0},
       mCurrentChunk{0}
   {

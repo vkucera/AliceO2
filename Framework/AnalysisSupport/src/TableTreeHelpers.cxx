@@ -37,7 +37,7 @@ auto arrowTypeFromROOT(EDataType type, int size)
       case -1:
         return arrow::list(type);
       case 1:
-        return std::move(type);
+        return type;
       default:
         return arrow::fixed_size_list(type, size);
     }

@@ -881,7 +881,7 @@ class RootTreeWriter
       std::unique_ptr<TreeStructureInterface> ret(instance.release());
       return ret;
     } else {
-      return std::move(createTreeStructure<N + 1, type>(std::forward<Args>(args)...));
+      return createTreeStructure<N + 1, type>(std::forward<Args>(args)...);
     }
   }
 

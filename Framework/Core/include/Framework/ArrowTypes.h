@@ -178,7 +178,7 @@ std::shared_ptr<arrow::DataType> asArrowDataType(int list_size = 1)
       case -1:
         return arrow::list(type);
       case 1:
-        return std::move(type);
+        return type;
       default:
         return arrow::fixed_size_list(type, list_size);
     }

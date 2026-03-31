@@ -253,7 +253,7 @@ class DataAllocator
     requires(requires { static_cast<struct TableBuilder>(std::declval<std::decay_t<T>>()); })
   decltype(auto) make(const Output& spec, Args... args)
   {
-    auto tb = std::move(LifetimeHolder<TableBuilder>(new std::decay_t<T>(args...)));
+    auto tb = LifetimeHolder<TableBuilder>(new std::decay_t<T>(args...));
     adopt(spec, tb);
     return tb;
   }
@@ -262,7 +262,7 @@ class DataAllocator
     requires(requires { static_cast<struct FragmentToBatch>(std::declval<std::decay_t<T>>()); })
   decltype(auto) make(const Output& spec, Args... args)
   {
-    auto f2b = std::move(LifetimeHolder<FragmentToBatch>(new std::decay_t<T>(args...)));
+    auto f2b = LifetimeHolder<FragmentToBatch>(new std::decay_t<T>(args...));
     adopt(spec, f2b);
     return f2b;
   }

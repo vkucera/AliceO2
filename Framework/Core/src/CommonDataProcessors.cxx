@@ -156,7 +156,6 @@ void retryMetricCallback(uv_async_t* async)
   O2_SIGNPOST_EVENT_EMIT(callbacks, cid, "rate-limiting", "Attempting again propagating rate-limiting information.");
 
   // Check if this is a source device
-  static size_t lastTimeslice = -1;
   auto* services = (ServiceRegistryRef*)async->data;
   auto& timesliceIndex = services->get<TimesliceIndex>();
   auto* device = services->get<RawDeviceService>().device();
@@ -192,7 +191,6 @@ void retryMetricCallback(uv_async_t* async)
     uv_async_send(async);
   } else {
     O2_SIGNPOST_EVENT_EMIT(callbacks, cid, "rate-limiting", "Send %llu bytes, Last timeslice now set to %zu.", result, consumed);
-    lastTimeslice = consumed;
   }
 }
 

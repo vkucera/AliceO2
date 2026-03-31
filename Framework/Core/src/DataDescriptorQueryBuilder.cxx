@@ -72,7 +72,6 @@ std::vector<InputSpec> DataDescriptorQueryBuilder::parse(char const* config)
   std::optional<std::string> currentValue;
   std::optional<header::DataHeader::SubSpecificationType> currentSubSpec;
   std::optional<uint64_t> currentTimeModulo;
-  Lifetime currentLifetime = Lifetime::Timeframe;
   size_t currentNumber;
 
   auto error = [&errorString, &states](std::string const& s) {
@@ -318,7 +317,6 @@ std::vector<InputSpec> DataDescriptorQueryBuilder::parse(char const* config)
         if (*next == '&') {
           assignLastStringMatch("value", 1000, currentValue, IN_BEGIN_KEY);
           if (*currentKey == "lifetime" && currentValue == "condition") {
-            currentLifetime = Lifetime::Condition;
           }
           if (*currentKey == "ccdb-run-dependent") {
             int val = currentValue == "false" ? 0 : (currentValue == "true" ? 1 : std::stoi(*currentValue));
@@ -329,7 +327,6 @@ std::vector<InputSpec> DataDescriptorQueryBuilder::parse(char const* config)
         } else if (*next == ';') {
           assignLastStringMatch("value", 1000, currentValue, IN_END_ATTRIBUTES);
           if (*currentKey == "lifetime" && currentValue == "condition") {
-            currentLifetime = Lifetime::Condition;
           }
           if (*currentKey == "ccdb-run-dependent") {
             int val = currentValue == "false" ? 0 : (currentValue == "true" ? 1 : std::stoi(*currentValue));
@@ -340,7 +337,6 @@ std::vector<InputSpec> DataDescriptorQueryBuilder::parse(char const* config)
         } else if (*next == '\0') {
           assignLastStringMatch("value", 1000, currentValue, IN_END_ATTRIBUTES);
           if (*currentKey == "lifetime" && currentValue == "condition") {
-            currentLifetime = Lifetime::Condition;
           }
           if (*currentKey == "ccdb-run-dependent") {
             int val = currentValue == "false" ? 0 : (currentValue == "true" ? 1 : std::stoi(*currentValue));
@@ -368,7 +364,7 @@ std::vector<InputSpec> DataDescriptorQueryBuilder::parse(char const* config)
       } break;
     }
   }
-  return std::move(result);
+  return result;
 }
 
 DataDescriptorQuery DataDescriptorQueryBuilder::buildFromKeepConfig(std::string const& config)
@@ -398,7 +394,7 @@ DataDescriptorQuery DataDescriptorQueryBuilder::buildFromKeepConfig(std::string 
     }
   }
 
-  return std::move(DataDescriptorQuery{{}, std::move(result)});
+  return DataDescriptorQuery{{}, std::move(result)};
 }
 
 DataDescriptorQuery DataDescriptorQueryBuilder::buildFromExtendedKeepConfig(std::string const& config)
@@ -442,7 +438,7 @@ DataDescriptorQuery DataDescriptorQueryBuilder::buildFromExtendedKeepConfig(std:
     }
   }
 
-  return std::move(DataDescriptorQuery{{}, std::move(result)});
+  return DataDescriptorQuery{{}, std::move(result)};
 }
 
 std::unique_ptr<DataDescriptorMatcher> DataDescriptorQueryBuilder::buildNode(std::string const& nodeString)

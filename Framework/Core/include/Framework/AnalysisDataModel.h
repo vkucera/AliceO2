@@ -1196,7 +1196,6 @@ DECLARE_SOA_COLUMN(ChannelT, channelT, std::vector<uint8_t>); //! Channel IDs wh
 // Dynamic columns to take into account packed information; replace old getters
 DECLARE_SOA_DYNAMIC_COLUMN(DyEnergyZEM1, energyZEM1, //! return ZEM1 energy
                            [](gsl::span<const uint8_t> channelE, gsl::span<const float> energy) -> float {
-                             auto ne = channelE.size();
                              auto thisenergy = -std::numeric_limits<float>::infinity();
                              for (uint64_t ie = 0; ie < channelE.size(); ie++) {
                                if (channelE[ie] == o2::zdc::IdZEM1) {

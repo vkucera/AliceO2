@@ -28,7 +28,7 @@ TEST_CASE("TestCreation")
 {
   auto transport = fair::mq::TransportFactory::CreateTransportFactory("zeromq");
   FairMQResizableBuffer buffer{[&transport](size_t size) -> std::unique_ptr<fair::mq::Message> {
-    return std::move(transport->CreateMessage(size));
+    return transport->CreateMessage(size);
   }};
 }
 
@@ -37,7 +37,7 @@ TEST_CASE("TestInvariants")
 {
   auto transport = fair::mq::TransportFactory::CreateTransportFactory("zeromq");
   FairMQResizableBuffer buffer{[&transport](size_t size) -> std::unique_ptr<fair::mq::Message> {
-    return std::move(transport->CreateMessage(size));
+    return transport->CreateMessage(size);
   }};
 
   REQUIRE(buffer.size() == 0);
@@ -81,7 +81,7 @@ TEST_CASE("TestContents")
 {
   auto transport = fair::mq::TransportFactory::CreateTransportFactory("zeromq");
   FairMQResizableBuffer buffer{[&transport](size_t size) -> std::unique_ptr<fair::mq::Message> {
-    return std::move(transport->CreateMessage(size));
+    return transport->CreateMessage(size);
   }};
 
   REQUIRE(buffer.size() == 0);

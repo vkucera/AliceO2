@@ -255,7 +255,7 @@ std::vector<DataProcessorSpec> defineDataProcessing(ConfigContext const& config)
           fair::mq::Parts out;
           out.AddPart(std::move(headerMessage));
           // add empty payload message
-          out.AddPart(std::move(device.NewMessageFor(*channelName, 0, 0)));
+          out.AddPart(device.NewMessageFor(*channelName, 0, 0));
           o2::framework::sendOnChannel(device, out, *channelName, (size_t)-1);
           messageContext.fakeDispatch();
         }

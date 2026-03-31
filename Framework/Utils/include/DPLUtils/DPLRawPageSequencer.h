@@ -114,7 +114,7 @@ class DPLRawPageSequencer
         continue;
       }
       // FIXME: automatic type from inserter/predicate?
-      const char* iterator = ref.payload;
+      [[maybe_unused]] const char* iterator = ref.payload;
 
       auto check = [&pred, &pageSize, payload = ref.payload](size_t left, size_t right) -> bool {
         return pred(payload + left * pageSize, payload + right * pageSize);

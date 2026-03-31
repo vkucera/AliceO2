@@ -48,15 +48,15 @@ WorkflowSpec defineDataProcessing(ConfigContext const& config)
           std::stringstream rdhprintout;
           for (auto it = parser.begin(), end = parser.end(); it != end; ++it) {
             // retrieving RDH v4
-            auto const* rdh = it.get_if<o2::header::RAWDataHeaderV4>();
+            [[maybe_unused]] auto const* rdh = it.get_if<o2::header::RAWDataHeaderV4>();
             // retrieving the raw pointer of the page
-            auto const* raw = it.raw();
+            [[maybe_unused]] auto const* raw = it.raw();
             // retrieving payload pointer of the page
-            auto const* payload = it.data();
+            [[maybe_unused]] auto const* payload = it.data();
             // size of payload
-            size_t payloadSize = it.size();
+            [[maybe_unused]] size_t payloadSize = it.size();
             // offset of payload in the raw page
-            size_t offset = it.offset();
+            [[maybe_unused]] size_t offset = it.offset();
 
             // Note: the following code is only for printing out raw page information
             const auto* dh = it.o2DataHeader();

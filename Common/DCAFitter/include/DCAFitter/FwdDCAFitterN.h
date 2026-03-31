@@ -35,7 +35,7 @@ namespace vertexing
 struct FwdTrackCovI {
   float sxx, syy, sxy, szz;
 
-  FwdTrackCovI(const o2::track::TrackParCovFwd& trc, float zerrFactor = 1.) { set(trc, zerrFactor); }
+  explicit FwdTrackCovI(const o2::track::TrackParCovFwd& trc, float zerrFactor = 1.) { set(trc, zerrFactor); }
   FwdTrackCovI() = default;
   void set(const o2::track::TrackParCovFwd& trc, float zerrFactor = 1)
   {
@@ -61,7 +61,7 @@ struct FwdTrackDeriv {
   FwdTrackDeriv(const o2::track::TrackParFwd& trc, float bz) { set(trc, bz); }
   void set(const o2::track::TrackParFwd& trc, float bz)
   {
-    float snp = trc.getSnp(), csp = std::sqrt((1. - snp) * (1. + snp)), cspI = 1. / csp, crv2c = trc.getCurvature(bz), tgl = trc.getTanl(), tglI = 1. / tgl;
+    float snp = trc.getSnp(), csp = std::sqrt((1. - snp) * (1. + snp)), crv2c = trc.getCurvature(bz), tgl = trc.getTanl(), tglI = 1. / tgl;
     if (crv2c == 0.) {
       crv2c = (trc.getCharge()) * 0.3 * bz * (-1e-3);
     }
@@ -113,7 +113,7 @@ class FwdDCAFitterN
   const auto getPCACandidatePos(int cand = 0) const
   {
     const auto& vd = mPCA[mOrder[cand]];
-    return std::array<float, 3>{float(vd[0]), float(vd[1]), float(vd[2])};
+    return std::array<float, 3>{static_cast<float>(vd[0]), static_cast<float>(vd[1]), static_cast<float>(vd[2])};
   }
 
   ///< return Chi2 at PCA candidate (no check for its validity)
@@ -144,7 +144,7 @@ class FwdDCAFitterN
   std::array<float, 6> calcPCACovMatrixFlat(int cand = 0) const
   {
     auto m = calcPCACovMatrix(cand);
-    return {float(m(0, 0)), float(m(1, 0)), float(m(1, 1)), float(m(2, 0)), float(m(2, 1)), float(m(2, 2))};
+    return {static_cast<float>(m(0, 0)), static_cast<float>(m(1, 0)), static_cast<float>(m(1, 1)), static_cast<float>(m(2, 0)), static_cast<float>(m(2, 1)), static_cast<float>(m(2, 2))};
   }
 
   const Track* getOrigTrackPtr(int i) const { return mOrigTrPtr[i]; }
@@ -711,7 +711,7 @@ bool FwdDCAFitterN<N, Args...>::FwdpropagateTracksToVertex(int icand)
   for (int i = N; i--;) {
     mCandTr[ord][i] = *mOrigTrPtr[i]; // fetch the track again, as mCandTr might have been propagated w/o errors
     auto& trc = mCandTr[ord][i];
-    const std::array<float, 3> p = {(float)pca[0], (float)pca[1], (float)pca[2]};
+    const std::array<float, 3> p = {static_cast<float>(pca[0]), static_cast<float>(pca[1]), static_cast<float>(pca[2])};
     if (!propagateToVtx(trc, p, cov)) {
       return false;
     }
@@ -740,7 +740,6 @@ float FwdDCAFitterN<N, Args...>::findZatXY(int mCurHyp) // Between 2 tracks
 
   double dstXY[2][3] = {{999., 999., 999.}, {999., 999., 999.}};
 
-  double Z[2];
   double finalZ[2];
 
   double newDstXY;
@@ -784,8 +783,6 @@ void FwdDCAFitterN<N, Args...>::findZatXY_mid(int mCurHyp)
   double endPoint = 50.;
   double midPoint = 0.5 * (startPoint + endPoint);
 
-  double z[2][2] = {{startPoint, endPoint}, {startPoint, endPoint}}; // z for tracks 0/1 on starting poing and endpoint
-
   double DeltaZ = std::abs(endPoint - startPoint);
 
   double newX[2][2];
@@ -793,13 +790,10 @@ void FwdDCAFitterN<N, Args...>::findZatXY_mid(int mCurHyp)
 
   double epsilon = 0.0001;
 
-  double X = mPCA[mCurHyp][0]; // X seed
-  double Y = mPCA[mCurHyp][1]; // Y seed
-
   mCandTr[mCurHyp][0] = *mOrigTrPtr[0];
   mCandTr[mCurHyp][1] = *mOrigTrPtr[1];
 
-  double finalZ;
+  double finalZ{};
 
   double dstXY[2]; // 0 -> distance btwn both tracks at startPoint
 
@@ -849,9 +843,6 @@ void FwdDCAFitterN<N, Args...>::findZatXY_lineApprox(int mCurHyp)
 
   double startPoint = 1.;
   double endPoint = 50.; // first disk
-
-  double X = mPCA[mCurHyp][0]; // X seed
-  double Y = mPCA[mCurHyp][1]; // Y seed
 
   mCandTr[mCurHyp][0] = *mOrigTrPtr[0];
   mCandTr[mCurHyp][1] = *mOrigTrPtr[1];
@@ -1277,11 +1268,11 @@ inline bool FwdDCAFitterN<N, Args...>::propagateToVtx(o2::track::TrackParCovFwd&
   float x2x0 = 0;
   if (mUseMatBudget) {
     auto mb = mMatLUT->getMatBudget(t.getX(), t.getY(), t.getZ(), p[0], p[1], p[2]);
-    x2x0 = (float)mb.meanX2X0;
+    x2x0 = static_cast<float>(mb.meanX2X0);
     return t.propagateToVtxhelixWithMCS(p[2], {p[0], p[1]}, cov, mBz, x2x0);
   } else if (mTGeoFallBackAllowed) {
     auto geoMan = o2::base::GeometryManager::meanMaterialBudget(t.getX(), t.getY(), t.getZ(), p[0], p[1], p[2]);
-    x2x0 = (float)geoMan.meanX2X0;
+    x2x0 = static_cast<float>(geoMan.meanX2X0);
     return t.propagateToVtxhelixWithMCS(p[2], {p[0], p[1]}, cov, mBz, x2x0);
   } else {
     t.propagateToZhelix(p[2], mBz);

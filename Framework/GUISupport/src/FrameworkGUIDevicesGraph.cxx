@@ -300,7 +300,7 @@ struct MetricsPainter {
         auto item = getItem(record, ii);
         int value = getValue(item);
         ImU32 color = getColor(value);
-        ImVec2 pos = ImGui::GetCursorScreenPos();
+        [[maybe_unused]] ImVec2 pos = ImGui::GetCursorScreenPos();
         describeCell(ri, ii, value, color, context);
       }
     }
@@ -699,7 +699,7 @@ void showTopologyNodeGraph(WorkspaceGUIState& state,
     draw_list->AddBezierCurve(p1, p1 + ImVec2(+50, 0), p2 + ImVec2(-50, 0), p2, color, thickness);
   }
 
-  auto fgDrawList = ImGui::GetForegroundDrawList();
+  [[maybe_unused]] auto fgDrawList = ImGui::GetForegroundDrawList();
   // Display nodes
   for (int node_idx = 0; node_idx < nodes.Size; node_idx++) {
     auto backgroundLayer = (node_idx + 1) * 2;

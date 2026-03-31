@@ -62,7 +62,6 @@ void DevicesManager::flush()
     return this->controls[handle.ref.index].controller != nullptr;
   };
   auto it = std::remove_if(messages.begin(), messages.end(), checkIfController);
-  auto r = std::distance(it, messages.end());
   messages.erase(it, messages.end());
 }
 

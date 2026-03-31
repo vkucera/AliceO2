@@ -83,7 +83,6 @@ void* DataRefUtils::decodeCCDB(DataRef const& ref, std::type_info const& tinfo)
   gErrorIgnoreLevel = kFatal;
   auto* dh = o2::header::get<o2::header::DataHeader*>(ref.header);
   const char* buff = const_cast<char*>(ref.payload);
-  size_t flSize = dh->payloadSize;
   // does it have a flattened headers map attached in the end?
   constexpr char FlatHeaderAnnot[] = "$HEADER$";
   constexpr int Offset = sizeof(int) + sizeof(FlatHeaderAnnot);

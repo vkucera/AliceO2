@@ -22,9 +22,9 @@ namespace o2::framework
 DataProcessingStats::DataProcessingStats(std::function<void(int64_t& base, int64_t& offset)> getRealtimeBase_,
                                          std::function<int64_t(int64_t base, int64_t offset)> getTimestamp_,
                                          DefaultConfig config_)
-  : getTimestamp(getTimestamp_),
+  : config(config_),
     getRealtimeBase(getRealtimeBase_),
-    config(config_)
+    getTimestamp(getTimestamp_)
 {
   getRealtimeBase(realTimeBase, initialTimeOffset);
 }

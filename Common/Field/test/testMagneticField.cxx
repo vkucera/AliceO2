@@ -34,7 +34,7 @@ BOOST_AUTO_TEST_CASE(MagneticField_test)
 
   const int ntst = 10000;
   float rnd[3];
-  double xyz[ntst][3] = {}, bxyz[ntst][3] = {}, dummyAcc = 0.;
+  double xyz[ntst][3] = {}, bxyz[ntst][3] = {};
   // fill input
   for (int it = ntst; it--;) {
     gRandom->RndmArray(3, rnd);

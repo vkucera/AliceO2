@@ -121,8 +121,8 @@ concept is_configurable_axis = is_configurable<T> &&
 template <typename T, typename... As>
 struct ProcessConfigurable : Configurable<bool, ConfigParamKind::kProcessFlag> {
   ProcessConfigurable(void (T::*process_)(As...), std::string const& name_, bool&& value_, std::string const& help_)
-    : process{process_},
-      Configurable<bool, ConfigParamKind::kProcessFlag>(name_, std::forward<bool>(value_), help_)
+    : Configurable<bool, ConfigParamKind::kProcessFlag>(name_, std::forward<bool>(value_), help_),
+      process{process_}
   {
   }
   void (T::*process)(As...);

@@ -40,7 +40,7 @@ std::string LocalRootFileService::format(const char* format, ...)
   va_start(arglist, format);
   vsnprintf(buffer, PATH_MAX, format, arglist);
   va_end(arglist);
-  return std::move(std::string(buffer));
+  return std::string(buffer);
 }
 
 } // namespace framework

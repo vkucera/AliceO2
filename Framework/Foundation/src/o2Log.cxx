@@ -98,10 +98,10 @@ int main(int argc, char** argv)
     {"address", required_argument, nullptr, 'a'},
     {"stacktrace", required_argument, nullptr, 's'},
     {nullptr, 0, nullptr, 0}};
-  int opt;
-  pid_t pid;
+  int opt{};
+  pid_t pid{};
   int stacktrace = 1;
-  void* addr;
+  void* addr{};
   while ((opt = getopt_long(argc, argv, "p:a:", long_options, nullptr)) != -1) {
     switch (opt) {
       case 'p':

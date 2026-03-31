@@ -64,7 +64,7 @@ AlgorithmSpec simplePipe(std::string const& what, int minDelay)
     LOG(info) << "There are " << runningWorkflow.devices.size() << "  devices in the workflow";
     return adaptStateless([what, minDelay](DataAllocator& outputs, RawDeviceService& device) {
       device.device()->WaitFor(std::chrono::milliseconds(minDelay));
-      auto& bData = outputs.make<int>(OutputRef{what}, 1);
+      [[maybe_unused]] auto& bData = outputs.make<int>(OutputRef{what}, 1);
     });
   })};
 }
